@@ -1,0 +1,3427 @@
+{
+	"info": {
+		"_postman_id": "c4bb8e58-6d80-4eed-9667-c69b88324c9a",
+		"name": "Fantasy World Copy 2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "auth/sign-in",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "appVer",
+								"value": "1.0.0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "login",
+									"value": "YWRtaW4=",
+									"description": "Логин терминала",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "MTIzNDU2Nzg=",
+									"description": "Пароль терминала",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/v1/auth/sign-in",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"sign-in"
+							]
+						},
+						"description": "Авторизация\n\n*params in base64encode"
+					},
+					"response": []
+				}
+			],
+			"description": "Секция Авторизации",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "pay",
+			"item": [
+				{
+					"name": "pay/payment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{MOBILE_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "appVer",
+								"value": "1.0.0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "card",
+									"value": "100",
+									"description": "Номер карты",
+									"type": "text"
+								},
+								{
+									"key": "count",
+									"value": "2",
+									"description": "Количество людей",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/v1/pay/payment",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"v1",
+								"pay",
+								"payment"
+							]
+						},
+						"description": "Оплата аттракциона оператором\n\nОшибка:\n\n{\n    \"name\": \"Conflict\",\n    \"message\": \"LIM_BALANCE\",\n    \"code\": 0,\n    \"status\": 409,\n    \"type\": \"yii\\\\web\\\\ConflictHttpException\"\n}\n     \n\nLIM_BALANCE - недостаточно баланса\n\nPAYMENT_ERROR - ошибка при оплате\n\nCREATE_TRANSACTION_ERROR - ошибка создания транзакции\n\nCARD_NOT_FOUND - карта не найдена"
+					},
+					"response": []
+				},
+				{
+					"name": "pay/payment-admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{MOBILE_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"description": "Версия приложения",
+								"key": "appVer",
+								"type": "text",
+								"value": "1.0.0"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "card",
+									"value": "01002003",
+									"description": "Номер карты",
+									"type": "text"
+								},
+								{
+									"key": "attraction",
+									"value": "14",
+									"description": "ID Аттракциона",
+									"type": "text"
+								},
+								{
+									"key": "count",
+									"value": "5",
+									"description": "Количество людей",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/v1/pay/payment-admin",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"v1",
+								"pay",
+								"payment-admin"
+							]
+						},
+						"description": "Оплата аттракциона админом"
+					},
+					"response": []
+				},
+				{
+					"name": "pay/card-history",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{MOBILE_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "appVer",
+								"value": "1.0.0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "code",
+									"value": "01000999",
+									"description": "Номер карты",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/v1/pay/card-history",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"v1",
+								"pay",
+								"card-history"
+							]
+						},
+						"description": "История карты"
+					},
+					"response": []
+				}
+			],
+			"description": "Секция оплаты",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "front",
+			"item": [
+				{
+					"name": "user",
+					"item": [
+						{
+							"name": "front/add-user",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "vova",
+											"description": "Логин пользователя",
+											"type": "text"
+										},
+										{
+											"key": "fullname",
+											"value": "Voldemar",
+											"description": "Имя пользователя",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "12345678",
+											"description": "Пароль",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "1",
+											"description": "Роль",
+											"type": "text"
+										},
+										{
+											"key": "status",
+											"value": "1",
+											"description": "Статус",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/add-user",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"add-user"
+									]
+								},
+								"description": "Добавление пользователя\n\n    const ROLE_ADMIN = 1;\n    const ROLE_CASHIER = 2;\n    const ROLE_ACCOUNTANT = 3;\n\n    const STATUS_ACTIVE = 1;\n    const STATUS_NOT_ACTIVE = 0;"
+							},
+							"response": []
+						},
+						{
+							"name": "front/update-user",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "vova11",
+											"description": "Логин пользователя",
+											"type": "text"
+										},
+										{
+											"key": "fullname",
+											"value": "Voldemar",
+											"description": "Имя пользователя",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "12345678",
+											"description": "Пароль",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "1",
+											"description": "Роль",
+											"type": "text"
+										},
+										{
+											"key": "status",
+											"value": "1",
+											"description": "Статус",
+											"type": "text"
+										},
+										{
+											"key": "id",
+											"value": "2",
+											"description": "Иднетификатор пользователя",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/update-user",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"update-user"
+									]
+								},
+								"description": "Изменение пользователя\n\n    const ROLE_ADMIN = 1;\n    const ROLE_CASHIER = 2;\n    const ROLE_ACCOUNTANT = 3;\n\n    const STATUS_ACTIVE = 1;\n    const STATUS_NOT_ACTIVE = 0;"
+							},
+							"response": []
+						},
+						{
+							"name": "front/user-list",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/user-list",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"user-list"
+									]
+								},
+								"description": "Список пользователей"
+							},
+							"response": []
+						},
+						{
+							"name": "front/delete-user",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "id",
+											"value": "2",
+											"description": "Идентификатор пользователя",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/delete-user",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"delete-user"
+									]
+								},
+								"description": "Удаление терминала"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "terminal",
+					"item": [
+						{
+							"name": "front/terminal-list",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/terminal-list",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"terminal-list"
+									]
+								},
+								"description": "Список терминалов"
+							},
+							"response": []
+						},
+						{
+							"name": "front/add-terminal",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Терминал 55",
+											"description": "Название терминала",
+											"type": "text"
+										},
+										{
+											"key": "login",
+											"value": "term55",
+											"description": "Логин терминала",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "term5555",
+											"description": "Пароль терминала",
+											"type": "text"
+										},
+										{
+											"key": "attId",
+											"value": "1",
+											"description": "Идентификатор аттрациона",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "1",
+											"description": "Роль",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/add-terminal",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"add-terminal"
+									]
+								},
+								"description": "Добавление терминала\n\n    const ROLE_OPERATOR = 1;\n    const ROLE_ADMIN = 2;"
+							},
+							"response": []
+						},
+						{
+							"name": "front/update-terminal",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "test1234",
+											"description": "Название терминала",
+											"type": "text"
+										},
+										{
+											"key": "login",
+											"value": "test1234",
+											"description": "Логин терминала",
+											"type": "text"
+										},
+										{
+											"key": "id",
+											"value": "2",
+											"description": "Идентификатор терминала",
+											"type": "text"
+										},
+										{
+											"key": "attId",
+											"value": "14",
+											"description": "Идентификатор аттрациона",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "1",
+											"description": "Роль",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "1234567",
+											"description": "Пароль терминала",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/update-terminal",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"update-terminal"
+									]
+								},
+								"description": "Обновление терминала\n\n    const ROLE_OPERATOR = 1;\n    const ROLE_ADMIN = 2;"
+							},
+							"response": []
+						},
+						{
+							"name": "front/delete-terminal",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "id",
+											"value": "2",
+											"description": "Идентификатор терминала",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/delete-terminal",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"delete-terminal"
+									]
+								},
+								"description": "Удаление терминала"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "attraction",
+					"item": [
+						{
+							"name": "front/attraction-list",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/attraction-list",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"attraction-list"
+									]
+								},
+								"description": "Список аттракционов"
+							},
+							"response": []
+						},
+						{
+							"name": "front/add-attraction",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "АттракционЫЫЫЫЫsss",
+											"description": "Название аттракциона",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "100500",
+											"description": "Цена аттракциона",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/add-attraction",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"add-attraction"
+									]
+								},
+								"description": "Добавление карты"
+							},
+							"response": []
+						},
+						{
+							"name": "front/update-attraction",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Аттраss",
+											"description": "Название аттракциона",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "199",
+											"description": "Цена аттракциона",
+											"type": "text"
+										},
+										{
+											"key": "id",
+											"value": "2",
+											"description": "Идентификатор аттракциона",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/update-attraction",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"update-attraction"
+									]
+								},
+								"description": "Обновление аттракциона"
+							},
+							"response": []
+						},
+						{
+							"name": "front/delete-attraction",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "id",
+											"value": "2",
+											"description": "Идентификатор аттракциона",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/delete-attraction",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"delete-attraction"
+									]
+								},
+								"description": "Удаление аттракциона"
+							},
+							"response": []
+						},
+						{
+							"name": "front/url-excel-attraction",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/v1/front/url-excel-attraction",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"url-excel-attraction"
+									]
+								},
+								"description": "Получение ссылки на скачивания эксель файла с отчетом об аттракционах"
+							},
+							"response": []
+						},
+						{
+							"name": "front/import-excel-attraction",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"description": "Файл с данными для импорта",
+											"type": "file",
+											"src": "/C:/Users/фора/Downloads/s.xlsx"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/import-excel-attraction",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"import-excel-attraction"
+									]
+								},
+								"description": "Импорт записей с аттракционами"
+							},
+							"response": []
+						},
+						{
+							"name": "front/attraction-pagination-list",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "page",
+											"value": "0",
+											"description": "Номер страницы",
+											"type": "text"
+										},
+										{
+											"key": "limit",
+											"value": "10",
+											"description": "Лимит записей",
+											"type": "text"
+										},
+										{
+											"key": "dateFrom",
+											"value": "14.05.2021 12:39",
+											"description": "Дата с",
+											"type": "text"
+										},
+										{
+											"key": "dateTo",
+											"value": "14.05.2021 12:38",
+											"description": "Дата по",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/attraction-pagination-list",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"attraction-pagination-list"
+									]
+								},
+								"description": "Список аттракционов с пагинацией"
+							},
+							"response": []
+						},
+						{
+							"name": "front/attraction-total-list",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "dateFrom",
+											"value": "14.05.2021",
+											"description": "Дата с",
+											"type": "text"
+										},
+										{
+											"key": "dateTo",
+											"value": "14.05.2021",
+											"description": "Дата по",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/attraction-total-list",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"attraction-total-list"
+									]
+								},
+								"description": "Количество и общая сумма аттракционов с фильтром"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "front-auth/sign-in",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "login",
+											"value": "YWRtaW4=",
+											"description": "Логин пользователя",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "MTIzNDU2Nzg=",
+											"description": "Пароль пользователя",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front-auth/sign-in",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front-auth",
+										"sign-in"
+									]
+								},
+								"description": "Авторизация"
+							},
+							"response": []
+						},
+						{
+							"name": "front/add-token",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "token",
+											"value": "ss",
+											"description": "Firebase Токен",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}v1/front/add-token",
+									"host": [
+										"{{URL}}v1"
+									],
+									"path": [
+										"front",
+										"add-token"
+									]
+								},
+								"description": "Добавление токена"
+							},
+							"response": []
+						},
+						{
+							"name": "logout/logout",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/v1/logout/logout",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"logout",
+										"logout"
+									]
+								},
+								"description": "Выход из аккаунта"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "replenishment",
+					"item": [
+						{
+							"name": "front/replenishment-list",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/replenishment-list",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"replenishment-list"
+									]
+								},
+								"description": "Список пополнений"
+							},
+							"response": []
+						},
+						{
+							"name": "front/add-replenishment",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "amount",
+											"value": "100",
+											"description": "Цена",
+											"type": "text"
+										},
+										{
+											"key": "payment_method",
+											"value": "1",
+											"description": "Способ оплаты",
+											"type": "text"
+										},
+										{
+											"key": "discount_id",
+											"value": "1",
+											"description": "Идентификатор скидки",
+											"type": "text"
+										},
+										{
+											"key": "card_code",
+											"value": "100",
+											"description": "Номер карты",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/add-replenishment",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"add-replenishment"
+									]
+								},
+								"description": "Пополнение карты\n\n    const PAYMENT_BY_CARD = 1;\n    const PAYMENT_BY_CASH = 2;\n    const PAYMENT_BY_KASPI = 3;"
+							},
+							"response": []
+						},
+						{
+							"name": "front/replenishment-pagination-list",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "page",
+											"value": "0",
+											"description": "Номер страницы",
+											"type": "text"
+										},
+										{
+											"key": "limit",
+											"value": "50",
+											"description": "Лимит записей",
+											"type": "text"
+										},
+										{
+											"key": "userId",
+											"value": "1",
+											"description": "Идентификатор пользователя",
+											"type": "text"
+										},
+										{
+											"key": "paymentMethod",
+											"value": "2",
+											"description": "Способ оплаты",
+											"type": "text"
+										},
+										{
+											"key": "dateFrom",
+											"value": "14.05.2021 11:20",
+											"description": "Дата с",
+											"type": "text"
+										},
+										{
+											"key": "dateTo",
+											"value": "14.05.2021 11:19",
+											"description": "Дато по",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/replenishment-pagination-list",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"replenishment-pagination-list"
+									]
+								},
+								"description": "Список пополнений с пагинацией\n\n\n\n\n    const PAYMENT_BY_CARD = 1;\n    const PAYMENT_BY_CASH = 2;\n    const PAYMENT_BY_KASPI = 3;"
+							},
+							"response": []
+						},
+						{
+							"name": "front/url-excel-replenishment",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "userId",
+											"value": "1",
+											"description": "Идентификатор пользователя",
+											"type": "text"
+										},
+										{
+											"key": "paymentMethod",
+											"value": "1",
+											"description": "Способ оплаты",
+											"type": "text"
+										},
+										{
+											"key": "dateFrom",
+											"value": "14.05.2021",
+											"description": "Дата с ",
+											"type": "text"
+										},
+										{
+											"key": "dateTo",
+											"value": "14.05.2021",
+											"description": "Дата по",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/url-excel-replenishment",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"url-excel-replenishment"
+									]
+								},
+								"description": "Получение ссылки на эксель файл с отчетом пополнений\n\n\n    const PAYMENT_BY_CARD = 1;\n    const PAYMENT_BY_CASH = 2;\n    const PAYMENT_BY_KASPI = 3;"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "discount",
+					"item": [
+						{
+							"name": "front/discount-list",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/discount-list",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"discount-list"
+									]
+								},
+								"description": "Список скидок"
+							},
+							"response": []
+						},
+						{
+							"name": "front/discount-double-list",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/discount-double-list",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"discount-double-list"
+									]
+								},
+								"description": "Список скидок для кассы"
+							},
+							"response": []
+						},
+						{
+							"name": "front/add-discount",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Скидка 2%",
+											"description": "Название скидки",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "1",
+											"description": "Тип скидки",
+											"type": "text"
+										},
+										{
+											"key": "quantity",
+											"value": "2",
+											"description": "Сумма или процент скидки ",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/add-discount",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"add-discount"
+									]
+								},
+								"description": "Добавление дисконтной системы\n\n    const TYPE_DISCOUNT = 1;\n    const TYPE_BONUS = 2;"
+							},
+							"response": []
+						},
+						{
+							"name": "front/update-discount",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Скидка 2222222%",
+											"description": "Название скидки",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "1",
+											"description": "Тип скидки",
+											"type": "text"
+										},
+										{
+											"key": "quantity",
+											"value": "2",
+											"description": "Сумма или процент скидки",
+											"type": "text"
+										},
+										{
+											"key": "id",
+											"value": "1",
+											"description": "Идентификатор скидки",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/update-discount",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"update-discount"
+									]
+								},
+								"description": "Добавление дисконтной системы\n\n    const TYPE_DISCOUNT = 1;\n    const TYPE_BONUS = 2;"
+							},
+							"response": []
+						},
+						{
+							"name": "front/delete-discount",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "card_code",
+										"value": "100",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "id",
+											"value": "2",
+											"description": "Идентификатор скидки",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/delete-discount",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"delete-discount"
+									]
+								},
+								"description": "Удаление скидки"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "card",
+					"item": [
+						{
+							"name": "front/card-list",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/card-list",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"card-list"
+									]
+								},
+								"description": "Список карт"
+							},
+							"response": []
+						},
+						{
+							"name": "front/update-card",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "id",
+											"value": "1",
+											"description": "Идентификатор карты",
+											"type": "text"
+										},
+										{
+											"key": "status",
+											"value": "1",
+											"description": "Статус карты",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}v1/front/update-card",
+									"host": [
+										"{{URL}}v1"
+									],
+									"path": [
+										"front",
+										"update-card"
+									]
+								},
+								"description": "Обновление карты\n\n    const STATUS_BANNED = 0;\n    const STATUS_ACTIVE = 1;"
+							},
+							"response": []
+						},
+						{
+							"name": "front/activate-card",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "card_code",
+											"value": "010000010",
+											"description": "Номер карты",
+											"type": "text"
+										},
+										{
+											"key": "payment_method",
+											"value": "1",
+											"description": "Способ оплаты",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/activate-card",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"activate-card"
+									]
+								},
+								"description": "Активация карты\n\n    const PAYMENT_BY_CARD = 1;\n    const PAYMENT_BY_CASH = 2;\n    const PAYMENT_BY_KASPI = 3;"
+							},
+							"response": []
+						},
+						{
+							"name": "front/check-card",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "card_code",
+											"value": "100",
+											"description": "Номер карты",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/check-card",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"check-card"
+									]
+								},
+								"description": "Проверка карты"
+							},
+							"response": []
+						},
+						{
+							"name": "front/card-history",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "code",
+											"value": "100",
+											"description": "Номер карты",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/card-history",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"card-history"
+									]
+								},
+								"description": "История карты"
+							},
+							"response": []
+						},
+						{
+							"name": "front/transfer-balance",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "cardFromId",
+											"value": "2",
+											"description": "Карта, с которой переводятся деньги",
+											"type": "text"
+										},
+										{
+											"key": "cardToId",
+											"value": "3",
+											"description": "Карта, на которую переводятся деньги",
+											"type": "text"
+										},
+										{
+											"key": "userId",
+											"value": "1",
+											"description": "Идентификатор пользователя",
+											"type": "text"
+										},
+										{
+											"key": "reason",
+											"value": "0",
+											"description": "Причина перевода",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/transfer-balance",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"transfer-balance"
+									]
+								},
+								"description": "Перевод баланса\n\n    const REASON_CARD_DEFECT = 0;"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "report",
+					"item": [
+						{
+							"name": "front/report",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "card_code",
+											"value": "010000001",
+											"description": "Номер карты",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/report",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"report"
+									]
+								},
+								"description": "Отчеты пополнений\n\ncard_code если указан, поиск по данной карте, если нет, то вытаскивает по всем"
+							},
+							"response": []
+						},
+						{
+							"name": "front/report-pagination-list",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "page",
+											"value": "0",
+											"description": "Номер страницы",
+											"type": "text"
+										},
+										{
+											"key": "limit",
+											"value": "100",
+											"description": "Лимит записей",
+											"type": "text"
+										},
+										{
+											"key": "sessionId",
+											"value": "23",
+											"description": "Идентификатор сессии",
+											"type": "text"
+										},
+										{
+											"key": "card",
+											"value": "100",
+											"description": "Номер карты",
+											"type": "text"
+										},
+										{
+											"key": "dateFrom",
+											"value": "14.05.2021 11:20",
+											"description": "Дата с ",
+											"type": "text"
+										},
+										{
+											"key": "dateTo",
+											"value": "14.05.2021 11:20",
+											"description": "Дата по",
+											"type": "text"
+										},
+										{
+											"key": "paymentMethod",
+											"value": "1",
+											"description": "Способ оплаты",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/report-pagination-list",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"report-pagination-list"
+									]
+								},
+								"description": "Отчеты с пагинацией\n\n\n    const PAYMENT_BY_CARD = 1;\n    const PAYMENT_BY_CASH = 2;\n    const PAYMENT_BY_KASPI = 3;"
+							},
+							"response": []
+						},
+						{
+							"name": "front/url-excel-report",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/v1/front/url-excel-report",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"url-excel-report"
+									]
+								},
+								"description": "Получение ссылки на эксель файл с отчетами"
+							},
+							"response": []
+						},
+						{
+							"name": "front/report-cashier",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "card_code",
+											"value": "100",
+											"description": "Номер карты",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/report-cashier",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"report-cashier"
+									]
+								},
+								"description": "Отчеты кассира"
+							},
+							"response": []
+						},
+						{
+							"name": "front/report-cashier-list",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "page",
+											"value": "0",
+											"description": "Номер страницы",
+											"type": "text"
+										},
+										{
+											"key": "limit",
+											"value": "10",
+											"description": "Лимит записей",
+											"type": "text"
+										},
+										{
+											"key": "paymentMethod",
+											"value": "1",
+											"description": "Способ оплаты",
+											"type": "text"
+										},
+										{
+											"key": "dateFrom",
+											"value": "14.05.2021 11:20",
+											"description": "Дата с",
+											"type": "text"
+										},
+										{
+											"key": "dateTo",
+											"value": "14.05.2021 11:20",
+											"description": "Дата по",
+											"type": "text"
+										},
+										{
+											"key": "code",
+											"value": "100",
+											"description": "Номер карты",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/report-cashier-list",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"report-cashier-list"
+									]
+								},
+								"description": "Список отчетов кассира\n\n    const PAYMENT_BY_CARD = 1;\n    const PAYMENT_BY_CASH = 2;\n    const PAYMENT_BY_KASPI = 3;"
+							},
+							"response": []
+						},
+						{
+							"name": "front/report-session-list",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "page",
+											"value": "0",
+											"description": "Номер страницы",
+											"type": "text"
+										},
+										{
+											"key": "limit",
+											"value": "10",
+											"description": "Лимит записей",
+											"type": "text"
+										},
+										{
+											"key": "code",
+											"value": "100",
+											"description": "Номер карты",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/report-session-list",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"report-session-list"
+									]
+								},
+								"description": "Список отчетов за сессию"
+							},
+							"response": []
+						},
+						{
+							"name": "front/z-report",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/z-report",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"z-report"
+									]
+								},
+								"description": "z отчет"
+							},
+							"response": []
+						},
+						{
+							"name": "front/x-report",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/x-report",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"x-report"
+									]
+								},
+								"description": "х отчет"
+							},
+							"response": []
+						},
+						{
+							"name": "front/report-pagination-list",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "page",
+											"value": "0",
+											"description": "Номер страницы",
+											"type": "text"
+										},
+										{
+											"key": "limit",
+											"value": "100",
+											"description": "Лимит записей",
+											"type": "text"
+										},
+										{
+											"key": "sessionId",
+											"value": "23",
+											"description": "Идентификатор сессии",
+											"type": "text"
+										},
+										{
+											"key": "card",
+											"value": "101",
+											"description": "Номер карты",
+											"type": "text"
+										},
+										{
+											"key": "dateFrom",
+											"value": "04.05.2021",
+											"description": "Дата с",
+											"type": "text"
+										},
+										{
+											"key": "dateTo",
+											"value": "05.05.2021",
+											"description": "Дата по",
+											"type": "text"
+										},
+										{
+											"key": "paymentMethod",
+											"value": "2",
+											"description": "Способ оплаты",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/report-pagination-list",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"report-pagination-list"
+									]
+								},
+								"description": "Список отчетов с пагинацией\n\n    const PAYMENT_BY_CARD = 1;\n    const PAYMENT_BY_CASH = 2;\n    const PAYMENT_BY_KASPI = 3;"
+							},
+							"response": []
+						},
+						{
+							"name": "front/report-total-list",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "dateFrom",
+											"value": "04.05.2021",
+											"description": "Дата по",
+											"type": "text"
+										},
+										{
+											"key": "dateTo",
+											"value": "05.05.2021",
+											"description": "Дата с",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/report-total-list",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"report-total-list"
+									]
+								},
+								"description": "Общая сумма и количество отчетов"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "operation",
+					"item": [
+						{
+							"name": "front/operation-list",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "page",
+											"value": "0",
+											"description": "Номер страницы",
+											"type": "text"
+										},
+										{
+											"key": "limit",
+											"value": "10",
+											"description": "Лимит записей",
+											"type": "text"
+										},
+										{
+											"key": "code",
+											"value": "101",
+											"description": "Номер карты",
+											"type": "text"
+										},
+										{
+											"key": "operationType",
+											"value": "1",
+											"description": "Тип операции",
+											"type": "text"
+										},
+										{
+											"key": "sessionId",
+											"value": "22",
+											"description": "Идентификатор сессии",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/operation-list",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"operation-list"
+									]
+								},
+								"description": "Список операций \n\nТип пополнения - 0,\nТип списание - 1"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "session",
+					"item": [
+						{
+							"name": "front/session-list",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "cashierId",
+											"value": "1",
+											"description": "Идентификатор кассира",
+											"type": "text"
+										},
+										{
+											"key": "dateFrom",
+											"value": "06.05.2021",
+											"description": "Дата с",
+											"type": "text"
+										},
+										{
+											"key": "dateTo",
+											"value": "06.05.2021",
+											"description": "Дата по",
+											"type": "text"
+										},
+										{
+											"key": "page",
+											"value": "0",
+											"description": "Номер страницы",
+											"type": "text"
+										},
+										{
+											"key": "limit",
+											"value": "1",
+											"description": "Лимит записей",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/session-list",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"session-list"
+									]
+								},
+								"description": "Список сессий"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "transaction",
+					"item": [
+						{
+							"name": "front/write-off-total-list",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "dateFrom",
+											"value": "14.05.2021",
+											"description": "Дата по",
+											"type": "text"
+										},
+										{
+											"key": "dateTo",
+											"value": "14.05.2021",
+											"description": "Дата с",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/write-off-total-list",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"write-off-total-list"
+									]
+								},
+								"description": "Общее количество и сумма транзакций"
+							},
+							"response": []
+						},
+						{
+							"name": "front/transaction-pagination-list",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "page",
+											"value": "0",
+											"description": "Номер страницы",
+											"type": "text"
+										},
+										{
+											"key": "limit",
+											"value": "3",
+											"description": "Лимит записей",
+											"type": "text"
+										},
+										{
+											"key": "cashier",
+											"value": "1",
+											"description": "Идентификатор кассира",
+											"type": "text"
+										},
+										{
+											"key": "dateFrom",
+											"value": "14.05.2021 12:39",
+											"description": "Дата с",
+											"type": "text"
+										},
+										{
+											"key": "dateTo",
+											"value": "14.05.2021 12:39",
+											"description": "Дата по",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/transaction-pagination-list",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"transaction-pagination-list"
+									]
+								},
+								"description": "Список транзакций с пагинацией"
+							},
+							"response": []
+						},
+						{
+							"name": "front/url-excel-transaction",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "cashier",
+											"value": "1",
+											"description": "Идентификатор кассира",
+											"type": "text"
+										},
+										{
+											"key": "page",
+											"value": "0",
+											"description": "Номер страницы",
+											"type": "text"
+										},
+										{
+											"key": "limit",
+											"value": "10",
+											"description": "Лимит записей",
+											"type": "text"
+										},
+										{
+											"key": "dateFrom",
+											"value": "14.05.2021",
+											"description": "Дата с",
+											"type": "text"
+										},
+										{
+											"key": "dateTo",
+											"value": "14.05.2021",
+											"description": "Дата по",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/url-excel-transaction",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"url-excel-transaction"
+									]
+								},
+								"description": "Получение ссылки на эксель файл с транзакциями"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "statistic",
+					"item": [
+						{
+							"name": "front/statistic",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/statistic",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"statistic"
+									]
+								},
+								"description": "Статистика"
+							},
+							"response": []
+						},
+						{
+							"name": "front/statistic-transaction",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/statistic-transaction",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"statistic-transaction"
+									]
+								},
+								"description": "Статистика транзакций"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "message",
+					"item": [
+						{
+							"name": "front/add-message",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{FRONT_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "subject",
+											"value": "sdd",
+											"description": "Заголовок пуша",
+											"type": "text"
+										},
+										{
+											"key": "action",
+											"value": "5",
+											"description": "Как отправить",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "fdgfd",
+											"description": "Тело пуша",
+											"type": "text"
+										},
+										{
+											"key": "userId",
+											"value": "1",
+											"description": "ID юзера",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/v1/front/add-message",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"v1",
+										"front",
+										"add-message"
+									]
+								},
+								"description": "Добавление сообщения\n\n    const ACTION_PERSONAL = 1;\n    const ACTION_CASHIER = 2;\n    const ACTION_OPERATOR = 3;\n    const ACTION_ACCOUNTANT = 4;\n    const ACTION_ALL = 5;"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "attraction",
+			"item": [
+				{
+					"name": "attraction/list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{MOBILE_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"description": "Версия приложения",
+								"key": "appVer",
+								"type": "text",
+								"value": "1.0.0"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{URL}}/v1/attraction/list",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"v1",
+								"attraction",
+								"list"
+							]
+						},
+						"description": "Список аттракционов"
+					},
+					"response": []
+				},
+				{
+					"name": "attraction/transaction-count",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{MOBILE_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"description": "Версия приложения",
+								"key": "appVer",
+								"type": "text",
+								"value": "1.0.0"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{URL}}/v1/attraction/transaction-count",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"v1",
+								"attraction",
+								"transaction-count"
+							]
+						},
+						"description": "Кол-во транзакций аттракциона"
+					},
+					"response": []
+				},
+				{
+					"name": "attraction/check-card",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{MOBILE_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"description": "Версия приложения",
+								"key": "appVer",
+								"type": "text",
+								"value": "1.0.0"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "card_code",
+									"value": "100",
+									"description": "Номер карты",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/v1/attraction/check-card",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"v1",
+								"attraction",
+								"check-card"
+							]
+						},
+						"description": "Проверка карты"
+					},
+					"response": []
+				},
+				{
+					"name": "attraction/transaction-list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{MOBILE_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"description": "Версия приложения",
+								"key": "appVer",
+								"type": "text",
+								"value": "1.0.0"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "attraction",
+									"value": "1",
+									"description": "Номер карты",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/v1/attraction/transaction-list",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"v1",
+								"attraction",
+								"transaction-list"
+							]
+						},
+						"description": "Список транзакций"
+					},
+					"response": []
+				},
+				{
+					"name": "attraction/transaction-count-by-attraction",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{MOBILE_TOKEN}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"description": "Версия приложения",
+								"key": "appVer",
+								"type": "text",
+								"value": "1.0.0"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "attraction",
+									"value": "1",
+									"description": "Идентификатор аттракциона",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/v1/attraction/transaction-count-by-attraction",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"v1",
+								"attraction",
+								"transaction-count-by-attraction"
+							]
+						},
+						"description": "Кол-во транзакций аттракциона"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FCM",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "key=AAAAt9Pc35s:APA91bG-6qmANAfB36TzBVukQiZvajbXjY_p9aBSYoWtLsP77lw1YDoGJr1WQyYIEVOhnis3k6Pp9NWSlKch0b5-7-pfo3y2Cf4hC6vBM4XLnacPAPXv3SJBis9RU9U9gYCKHGh2VNfs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"to\" : \"dDSlkScWNRtMpnnDECX83n:APA91bECmgIIGh12qAkjgB3l5dR-_C8iiJANWTK9cz2Eu9RYuHsx-Cjh0RekEPs8wxYdC_ZAbOJ1iAiOayp_DjQd-F2-xSyOWsiel5zjqcBDJnMIjvjmz0GVisINV5hvv7yAZyNISmf6\"\n    , \n    \"notification\": {\n    \"body\": \"Firebase Cloud Message\"\n  }\n\n  }"
+				},
+				"url": {
+					"raw": "https://fcm.googleapis.com/fcm/send",
+					"protocol": "https",
+					"host": [
+						"fcm",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"fcm",
+						"send"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "http://api.fantasy.loc"
+		},
+		{
+			"key": "FRONT_TOKEN",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiIiLCJhdWQiOiIiLCJpYXQiOjE2MjA5NjgxMDIsIm5iZiI6MTYyMDk2ODEwMywiZXhwIjoxNjUyNTA0MTAyLCJkYXRhIjp7InVzZXJJZCI6MSwidXNlckFnZW50IjoiUG9zdG1hblJ1bnRpbWVcLzcuMjguMCIsImRldmljZVR5cGUiOiJTaXRlIn19.dsYJPn8eHB0lymj2beITyMHoNjbhjsyd6k5XcU4STQOBRRKHA0xIadrHljCXK4e22FHxqXBtNIe6c1Xhu5XFSg"
+		},
+		{
+			"key": "MOBILE_TOKEN",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiIiLCJhdWQiOiIiLCJpYXQiOjE2MjA5NjY5MjQsIm5iZiI6MTYyMDk2NjkyNSwiZXhwIjoxNjUyNTAyOTI0LCJkYXRhIjp7InVzZXJJZCI6MSwidXNlckFnZW50IjoiUG9zdG1hblJ1bnRpbWVcLzcuMjguMCIsImRldmljZVR5cGUiOiJTaXRlIn19.SsolIYZAq14oPYlVzkW6H5Q9J1_3tGabV27VUyne-QYxP1_vMJejTngd01PIKMHK9SG9-lMvYWbt2GteAclhqQ"
+		}
+	]
+}
